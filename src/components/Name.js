@@ -2,14 +2,12 @@ import React, {Component} from 'react';
 import './Component.css';
 import { Col } from 'react-bootstrap';
 
-class Value extends Component {
+class Name extends Component {
   render () {
     return (
-      <Col md={3}>
-        <h2>{this.props.value}</h2>
-      </Col>
+      <Col><h2>{this.props.name}</h2></Col>
     );
   }
 }
 
-export default Value;
+export default Name;
