@@ -1,18 +1,26 @@
 import React, {Component} from 'react';
 import './Component.css';
 import Initiative from './Initiative';
-import { Container } from 'react-bootstrap';
 
 class Encounter extends Component {
+  constructor () {
+    super();
+    this.state = {encounter: ""};
+  }
+
+  componentDidMount() {
+    const initiativesPromise = fetch('http://localhost:8000/');
+    initiativesPromise.then((response) => {
+      response.json().then((initiatives) => {
+        const encounter = initiatives.map((initiative) => <Initiative key={initiative.name} value={initiative.value} name={initiative.name} />)
+        this.setState({encounter: encounter});
+      })
+    });
+    console.log("component did mount");
+  }
+
   render () {
-    return (
-        <Container>
-            <Initiative value="20" name="Shaltorinn"/>
-            <Initiative value="16" name="Lorn"/>
-            <Initiative value="9" name="Dragon"/>
-            <Initiative value="2" name="Falkrainne"/>
-        </Container>
-    );
+    return this.state.encounter;
   }
 }
 
